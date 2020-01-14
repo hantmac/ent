@@ -36,9 +36,9 @@ type File struct {
 		// Type holds the value of the type edge.
 		Type *FileType
 	}
-	type_id       *string
-	group_file_id *string
-	owner_id      *string
+	file_type_files *string
+	group_files     *string
+	user_files      *string
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -55,9 +55,9 @@ func (*File) scanValues() []interface{} {
 // fkValues returns the types for scanning foreign-keys values from sql.Rows.
 func (*File) fkValues() []interface{} {
 	return []interface{}{
-		&sql.NullInt64{}, // type_id
-		&sql.NullInt64{}, // group_file_id
-		&sql.NullInt64{}, // owner_id
+		&sql.NullInt64{}, // file_type_files
+		&sql.NullInt64{}, // group_files
+		&sql.NullInt64{}, // user_files
 	}
 }
 
@@ -97,22 +97,22 @@ func (f *File) assignValues(values ...interface{}) error {
 	values = values[4:]
 	if len(values) == len(file.ForeignKeys) {
 		if value, ok := values[0].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field type_id", value)
+			return fmt.Errorf("unexpected type %T for edge-field file_type_files", value)
 		} else if value.Valid {
-			f.type_id = new(string)
-			*f.type_id = strconv.FormatInt(value.Int64, 10)
+			f.file_type_files = new(string)
+			*f.file_type_files = strconv.FormatInt(value.Int64, 10)
 		}
 		if value, ok := values[1].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field group_file_id", value)
+			return fmt.Errorf("unexpected type %T for edge-field group_files", value)
 		} else if value.Valid {
-			f.group_file_id = new(string)
-			*f.group_file_id = strconv.FormatInt(value.Int64, 10)
+			f.group_files = new(string)
+			*f.group_files = strconv.FormatInt(value.Int64, 10)
 		}
 		if value, ok := values[2].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field owner_id", value)
+			return fmt.Errorf("unexpected type %T for edge-field user_files", value)
 		} else if value.Valid {
-			f.owner_id = new(string)
-			*f.owner_id = strconv.FormatInt(value.Int64, 10)
+			f.user_files = new(string)
+			*f.user_files = strconv.FormatInt(value.Int64, 10)
 		}
 	}
 	return nil

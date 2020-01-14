@@ -30,7 +30,7 @@ type Node struct {
 		// Next holds the value of the next edge.
 		Next *Node
 	}
-	prev_id *string
+	node_next *string
 }
 
 // scanValues returns the types for scanning values from sql.Rows.
@@ -44,7 +44,7 @@ func (*Node) scanValues() []interface{} {
 // fkValues returns the types for scanning foreign-keys values from sql.Rows.
 func (*Node) fkValues() []interface{} {
 	return []interface{}{
-		&sql.NullInt64{}, // prev_id
+		&sql.NullInt64{}, // node_next
 	}
 }
 
@@ -68,10 +68,10 @@ func (n *Node) assignValues(values ...interface{}) error {
 	values = values[1:]
 	if len(values) == len(node.ForeignKeys) {
 		if value, ok := values[0].(*sql.NullInt64); !ok {
-			return fmt.Errorf("unexpected type %T for edge-field prev_id", value)
+			return fmt.Errorf("unexpected type %T for edge-field node_next", value)
 		} else if value.Valid {
-			n.prev_id = new(string)
-			*n.prev_id = strconv.FormatInt(value.Int64, 10)
+			n.node_next = new(string)
+			*n.node_next = strconv.FormatInt(value.Int64, 10)
 		}
 	}
 	return nil

@@ -12,7 +12,7 @@ require (
 	github.com/gorilla/websocket v1.4.2
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/json-iterator/go v1.1.10
-	github.com/lib/pq v1.8.0
+	github.com/lib/pq v1.10.0
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/mattn/go-sqlite3 v1.14.2
 	github.com/mitchellh/mapstructure v1.3.3
@@ -25,7 +25,6 @@ require (
 	github.com/stretchr/objx v0.2.0 // indirect
 	github.com/stretchr/testify v1.6.1
 	go.opencensus.io v0.22.4
-	golang.org/x/mod v0.3.0 // indirect
 	golang.org/x/sync v0.0.0-20200625203802-6e8e738ad208
 	golang.org/x/tools v0.0.0-20200904185747-39188db58858
 )
